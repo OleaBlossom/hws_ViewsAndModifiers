@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
 	var body: some View {
 		VStack(spacing: 10) {
+			Text("Hello World")
+				.titleStyle()
 			CapsuleText(text: "First")
 				.foregroundColor(.white)
 			CapsuleText(text: "Second")
@@ -42,5 +44,22 @@ struct CapsuleText: View {
 			.padding()
 			.background(.blue)
 			.clipShape(Capsule())
+	}
+}
+
+struct Title: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.largeTitle)
+			.foregroundColor(.white)
+			.padding()
+			.background(.pink)
+			.clipShape(RoundedRectangle(cornerRadius: 10))
+	}
+}
+
+extension View {
+	func titleStyle() -> some View {
+		modifier(Title())
 	}
 }
