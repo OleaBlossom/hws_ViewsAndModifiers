@@ -10,7 +10,10 @@ import SwiftUI
 struct ContentView: View {
 	var body: some View {
 		VStack(spacing: 10) {
-			spells
+			CapsuleText(text: "First")
+				.foregroundColor(.white)
+			CapsuleText(text: "Second")
+				.foregroundColor(.primary)
 		}
 	}
 }
@@ -27,5 +30,17 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
 		ContentView()
+	}
+}
+
+struct CapsuleText: View {
+	var text: String
+	
+	var body: some View {
+		Text(text)
+			.font(.largeTitle)
+			.padding()
+			.background(.blue)
+			.clipShape(Capsule())
 	}
 }
