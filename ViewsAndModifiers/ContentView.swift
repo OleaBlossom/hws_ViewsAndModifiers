@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
+	var body: some View {
+		VStack(spacing: 10) {
+			spells
+		}
+	}
+}
+
+@ViewBuilder var spells: some View {
+	Text("CopyPasto")
+	Text("Dleicioso")
+	Text("Floralorial")
+	Text("Herbio")
+	Text("Homewardial")
+	Text("Repario")
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+	static var previews: some View {
+		ContentView()
+	}
 }
