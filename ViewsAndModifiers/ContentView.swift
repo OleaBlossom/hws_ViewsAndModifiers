@@ -9,11 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
 	var body: some View {
-		GridStack(rows: 4, columns: 4) { row, col in
-			HStack {
-				Image(systemName: "\(row * 4 + col).circle")
-				Text("R\(row) C\(col)")
+		VStack {
+			Spacer()
+			Text("Grid Stack Title")
+				.titleStyleBlueText()
+			Spacer()
+			GridStack(rows: 4, columns: 4) { row, col in
+				HStack {
+					Image(systemName: "\(row * 4 + col).circle")
+					Text("R\(row) C\(col)")
+				}
 			}
+			Spacer()
 		}
 	}
 }
@@ -46,23 +53,6 @@ struct CapsuleText: View {
 	}
 }
 
-struct Title: ViewModifier {
-	func body(content: Content) -> some View {
-		content
-			.font(.largeTitle)
-			.foregroundColor(.white)
-			.padding()
-			.background(.pink)
-			.clipShape(RoundedRectangle(cornerRadius: 10))
-	}
-}
-
-extension View {
-	func titleStyle() -> some View {
-		modifier(Title())
-	}
-}
-
 struct Watermark: ViewModifier {
 	var text: String
 	
@@ -81,6 +71,39 @@ struct Watermark: ViewModifier {
 extension View {
 	func watermarked(with text: String) -> some View {
 		modifier(Watermark(text: text))
+	}
+}
+
+
+struct TitlePinkBackground: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.largeTitle)
+			.foregroundColor(.white)
+			.padding()
+			.background(.pink)
+			.clipShape(RoundedRectangle(cornerRadius: 10))
+	}
+}
+
+extension View {
+	func titleStylePinkBackground() -> some View {
+		modifier(TitlePinkBackground())
+	}
+}
+
+
+struct TitleBlueText: ViewModifier {
+	func body(content: Content) -> some View {
+		content
+			.font(.largeTitle)
+			.foregroundColor(.blue)
+	}
+}
+
+extension View {
+	func titleStyleBlueText() -> some View {
+		modifier(TitleBlueText())
 	}
 }
 
