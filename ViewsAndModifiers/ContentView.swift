@@ -9,9 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
 	var body: some View {
-		Color.blue
-			.frame(width: 300, height: 200)
-			.watermarked(with: "Hacking with Swift")
+		GridStack(rows: 4, columns: 4) { row, col in
+			HStack {
+				Image(systemName: "\(row * 4 + col).circle")
+				Text("R\(row) C\(col)")
+			}
+		}
 	}
 }
 
@@ -27,6 +30,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
 		ContentView()
+			.previewInterfaceOrientation(.landscapeRight)
 	}
 }
 
@@ -77,5 +81,23 @@ struct Watermark: ViewModifier {
 extension View {
 	func watermarked(with text: String) -> some View {
 		modifier(Watermark(text: text))
+	}
+}
+
+struct GridStack<Content: View>: View {
+	let rows: Int
+	let columns: Int
+	let content: (Int, Int) -> Content
+	
+	var body: some View {
+		HStack {
+			ForEach(0..<columns, id: \.self) { column in
+				VStack {
+					ForEach(0..<rows, id: \.self) { row in
+						content(row, column)
+					}
+				}
+			}
+		}
 	}
 }
